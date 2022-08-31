@@ -4,6 +4,7 @@ const server = require("http").Server(app);
 const io = require("socket.io")(server);
 const { v4: uuidv4 } = require("uuid");
 const { ExpressPeerServer } = require("peer");
+const { isTypedArray } = require("util/types");
 const peerServer = ExpressPeerServer(server, {
   debug: true,
 });
@@ -24,6 +25,9 @@ io.on("connection", (socket) => {
   socket.on("join-room", (roomId, userId) => {
     socket.join(roomId);
     socket.broadcast.to(roomId).emit("user-connected", userId);
+    socket.on("message", (message) => {
+      io.to(roomId).emit("createMessage", message);
+    });
   });
 });
 

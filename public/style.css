@@ -80,6 +80,7 @@ body {
 .main__chat_window {
   flex-grow: 1;
   overflow-y: auto;
+  margin-top: 30px;
 }
 
 .messages {
@@ -101,4 +102,9 @@ body {
 
 .leave-meeting:hover {
   color: #eb534b;
+}
+
+.unmute,
+.stop {
+  color: #cc3b33;
 }
